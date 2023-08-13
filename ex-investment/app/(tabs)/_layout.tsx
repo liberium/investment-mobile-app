@@ -1,10 +1,7 @@
-import { View, Text } from "react-native";
-import FontAwesome from "@expo/vector-icons/FontAwesome";
-import { Link, Tabs } from "expo-router";
-import { HeaderBackground, getHeaderTitle } from "@react-navigation/elements";
-import { Pressable, useColorScheme } from "react-native";
+import { Pressable } from "react-native";
+import { Tabs } from "expo-router";
+import { HeaderBackground } from "@react-navigation/elements";
 import { Icon } from "@/components";
-import Colors from "@/constants/Colors";
 
 export const unstable_settings = {
   // Ensure any route can link back to `/`
@@ -12,11 +9,9 @@ export const unstable_settings = {
 };
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
   return (
     <Tabs
-      // initialRouteName="signals"
+      initialRouteName="signals"
       screenOptions={({ navigation }) => ({
         tabBarLabelStyle: { textTransform: "uppercase" },
         tabBarActiveTintColor: "#E31212",
@@ -67,28 +62,14 @@ export default function TabLayout() {
       })}
     >
       <Tabs.Screen
-        name="index"
+        name="signals"
         options={{
           title: "Signals",
           tabBarIcon: ({ focused }) => <Icon name="signals" active={focused} />,
-          headerRight: () => (
-            <Link href="/modal" asChild>
-              <Pressable>
-                {({ pressed }) => (
-                  <FontAwesome
-                    name="info-circle"
-                    size={25}
-                    color={Colors[colorScheme ?? "light"].text}
-                    style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
-                  />
-                )}
-              </Pressable>
-            </Link>
-          ),
         }}
       />
       <Tabs.Screen
-        name="exchange"
+        name="index"
         options={{
           title: "Exchange",
           tabBarIcon: ({ focused }) => (

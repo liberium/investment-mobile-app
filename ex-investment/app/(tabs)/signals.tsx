@@ -3,37 +3,52 @@ import { View, Pressable, StyleSheet } from "react-native";
 import { Tabs } from "expo-router";
 import { useNavigation } from "@react-navigation/native";
 import SegmentedControl from "@react-native-segmented-control/segmented-control";
-import { UserAvatar, ExchangerList } from "@/components";
-import type { Exchanger } from "@/components/exchanger-list";
+import { UserAvatar, SignalList } from "@/components";
+import type { Signal } from "@/components/signal-list";
+const signals = [
+  {
+    id: "1",
+    asset: { base: "BTC", quote: "USD" },
+    direction: "Sell",
+    price: 54315,
+    takeProfit: 49872,
+    stopLoss: 54984,
+    status: "inactive",
+  },
+  {
+    id: "2",
+    asset: { base: "BTC", quote: "USD" },
+    direction: "Sell",
+    price: 54315,
+    takeProfit: 49872,
+    stopLoss: 54984,
+    status: "processing",
+  },
+  {
+    id: "3",
+    asset: { base: "BTC", quote: "USD" },
+    direction: "Sell",
+    price: 54315,
+    takeProfit: 49872,
+    stopLoss: 54984,
+    status: "processed",
+  },
+  {
+    id: "4",
+    asset: { base: "BTC", quote: "USD" },
+    direction: "Sell",
+    price: 54315,
+    takeProfit: 49872,
+    stopLoss: 54984,
+    status: "failed",
+  },
+];
 
-export default function ExchangeScreen() {
+export default function SignalsScreen() {
   const [selectedViewIndex, setSelectedViewIndex] = useState(0);
   const navigation: any = useNavigation();
 
-  const exchangers: Exchanger[] = [
-    {
-      id: "1",
-      destinationCurrency: "USDT",
-      exchangeRate: 1.087,
-      name: "ATM Cryptwolf",
-      address: "Mainly st. 209/44",
-      proximityMeters: 700,
-      coordinates: { latitude: 0, longitude: 0 },
-      exchangeRateGrowthRate: 3,
-    },
-    {
-      id: "2",
-      destinationCurrency: "USDT",
-      exchangeRate: 1.07,
-      name: "ATM Donglez",
-      address: "Bosted st. 19",
-      proximityMeters: 1300,
-      coordinates: { latitude: 0, longitude: 0 },
-      exchangeRateGrowthRate: -1,
-    },
-  ];
-
-  function handleShowOnMap() {}
+  function handleButtonPress(signalId: string) {}
 
   return (
     <>
@@ -51,7 +66,7 @@ export default function ExchangeScreen() {
               }}
             >
               <SegmentedControl
-                values={["MAP", "LIST"]}
+                values={["CRYPTO", "STOCK"]}
                 selectedIndex={selectedViewIndex}
                 onChange={(event) => {
                   setSelectedViewIndex(event.nativeEvent.selectedSegmentIndex);
@@ -84,7 +99,10 @@ export default function ExchangeScreen() {
         }}
       />
       <View style={styles.container}>
-        <ExchangerList exchangers={exchangers} onShowOnMap={handleShowOnMap} />
+        <SignalList
+          signals={signals as Signal[]}
+          onButtonPress={handleButtonPress}
+        />
       </View>
     </>
   );
