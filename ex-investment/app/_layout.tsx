@@ -13,7 +13,7 @@ import {
   DefaultTheme,
   ThemeProvider,
 } from "@react-navigation/native";
-import { Link, SplashScreen, Stack } from "expo-router";
+import { SplashScreen } from "expo-router";
 import { Drawer } from "expo-router/drawer";
 import {
   DrawerContentComponentProps,
@@ -27,7 +27,7 @@ import { UserAvatar } from "@/components";
 export { ErrorBoundary } from "expo-router";
 export const unstable_settings = {
   // Ensure that reloading on `/modal` keeps a back button present.
-  initialRouteName: "(tabs)/exchange",
+  initialRouteName: "(tabs)/signals",
 };
 
 SplashScreen.preventAutoHideAsync();
@@ -74,6 +74,23 @@ export default function RootLayout() {
 function DrawerContent(props: DrawerContentComponentProps) {
   return (
     <DrawerContentScrollView style={styles.drawer} {...props}>
+      <View style={styles.header}>
+        <Pressable
+          style={{ flexDirection: "row", alignItems: "center", gap: 8 }}
+          onPress={() => props.navigation.closeDrawer()}
+        >
+          <Icon name="backward" />
+          <Text style={styles.headerText}>My Profile</Text>
+        </Pressable>
+        <View style={{ flexDirection: "row", gap: 16 }}>
+          <Pressable onPress={() => props.navigation.closeDrawer()}>
+            <Icon name="qr" />
+          </Pressable>
+          <Pressable onPress={() => props.navigation.closeDrawer()}>
+            <Icon name="menu" />
+          </Pressable>
+        </View>
+      </View>
       <Pressable
         style={styles.panel}
         onPress={() => props.navigation.closeDrawer()}
@@ -210,6 +227,19 @@ const styles = StyleSheet.create({
   drawer: {
     flex: 1,
     backgroundColor: "#12141F",
+  },
+  header: {
+    padding: 16,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  headerText: {
+    color: "#fff",
+    fontSize: 14,
+    fontFamily: "muller-bold",
+    lineHeight: 19.2,
+    letterSpacing: 0.32,
   },
   panel: {
     padding: 16,

@@ -39,6 +39,7 @@ export default function ExchangerList({
 
   return (
     <FlatList
+      style={{ zIndex: -1 }}
       data={exchangers}
       renderItem={({ item: exchanger }: ListRenderItemInfo<Exchanger>) => (
         <Exchanger exchanger={exchanger} onShowOnMap={handleShowOnMap} />
